@@ -15,7 +15,16 @@ const Main = () => {
 
   const handlerArticles = (e) => {
     e.preventDefault();
-    setArticles([newArticles, ...articles])
+    if (newArticles) {
+      setArticles([newArticles, ...articles])
+      setNewArticles('');
+    }
+  }
+
+  const handlerDelete = (index) => {
+    const deleteArticles = articles.filter((array, i) => i != index);
+    setArticles(deleteArticles);
+
   }
 
   return (
@@ -33,7 +42,7 @@ const Main = () => {
         </div>
         <ul>
           {articles.map((item, index) => (
-            <li key={index}>{item}<div><i class="fa-solid fa-pencil"></i><i class="fa-solid fa-trash"></i></div></li>
+            <li key={index}>{item}<div><i className="fa-solid fa-pencil"></i><i className="fa-solid fa-trash" onClick={() => handlerDelete(index)}></i></div></li>
           ))}
         </ul>
       </div>
